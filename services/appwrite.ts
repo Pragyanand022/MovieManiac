@@ -49,7 +49,18 @@ export const getTrendingMovies = async (): Promise<
       Query.orderDesc("count"),
     ]);
 
-    return result.documents as unknown as TrendingMovie[];
+    // Filter unique movies based on movie_id using a Map
+    const uniqueMoviesMap = new Map<string, TrendingMovie>();
+
+    result.documents.forEach((doc:any) => {
+      if (!uniqueMoviesMap.has(doc.movie_id)) {
+        uniqueMoviesMap.set(doc.movie_id, doc);  // Store unique movie by `movie_id`
+      }
+    });
+
+    // Convert the Map to an array of unique movies and return it
+    return Array.from(uniqueMoviesMap.values());
+
   } catch (error) {
     console.error(error);
     return undefined;

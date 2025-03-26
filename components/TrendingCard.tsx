@@ -33,7 +33,7 @@ const TrendingCard = ({
 
         <Text
           className="text-sm font-bold mt-2 text-light-200"
-          numberOfLines={2}
+          numberOfLines={1}
         >
           {title}
         </Text>
