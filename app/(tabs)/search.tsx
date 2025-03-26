@@ -26,13 +26,13 @@ const Search = () => {
     setSearchQuery(text);
   };
 
-  // Debounced search effect
+  // Search effects are debounced that is updated with a delay of 500ms
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
 
-        // Call updateSearchCount only if there are results
+        // updateSearchCount is only be called if there are results available
         if (movies?.length! > 0 && movies?.[0]) {
           await updateSearchCount(searchQuery, movies[0]);
         }
